@@ -9,6 +9,6 @@ def hello_world():
 
 @app.route('/db_test')
 def tessting():
-    conn = psycopg2.connect("your_db_url_here")
+    conn = psycopg2.connect("postgress://dpg-cvm2ffggjchc73evir7g-a")
     conn.close()
     return "Database connection Successful"
