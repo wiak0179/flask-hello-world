@@ -48,4 +48,28 @@ def db_insert():
          ''')
     conn.commit()
     conn.close()
-    return "Inserted data into Basketball table!"
+    return "Basketball Table Successfully Populated"
+
+
+
+@app.route('/db_select')
+def selecting():
+    conn = psycopg2.connect("postgresql://akers_flask_lab10_db_user:q2hbLB5oMeWlBSmKZkQGYv1AfeGLg0QH@dpg-cvm2ffggjchc73evir7g-a.oregon-postgres.render.com/akers_flask_lab10_db")
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT * FROM Basketball;
+    ''')
+    records = cur.fetchall()
+    conn.close()
+    
+    response_string = ""
+    response_string += "<table>"
+    for player in records:
+        response_string += "<tr>"
+        for info in player:
+            response_string += "<td>{}</td>".format(info)
+        response_string += "</tr>"
+    response_string += "</table>"
+    
+    return response_string
+
